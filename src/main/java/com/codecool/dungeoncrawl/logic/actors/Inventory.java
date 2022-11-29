@@ -7,21 +7,22 @@ public class Inventory{
     private ArrayList <Items> gameInventory;
 
 
-
     public Inventory() {
         gameInventory = new ArrayList<>();
-
-
-
-
-
     }
 
-    public void Add(Items item) {
+    public String getItemsString(){
+        StringBuilder items = new StringBuilder();
+        for (Items item : gameInventory) {
+            items.append(item.getName());
+        }
+        return items.toString();
+    }
+    public void addItem(Items item) {
         gameInventory.add(item);
     }
 
-    public void Remove(Items item) {
+    public void removeItem(Items item) {
         gameInventory.remove(item);
     }
 

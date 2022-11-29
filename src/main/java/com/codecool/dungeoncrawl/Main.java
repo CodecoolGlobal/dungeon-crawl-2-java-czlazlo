@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Items;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -22,6 +23,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -35,7 +37,10 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Inventory Contents: "), 0,5);
+        ui.add(inventoryLabel, 0, 7);
 
+        map.getPlayer().gameInventory.addItem(Items.SWORD);
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -85,5 +90,7 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        inventoryLabel.setText(map.getPlayer().readInventory());
+
     }
 }
