@@ -26,9 +26,17 @@ public enum CellType {
     TLETTER("tletter"),
     WLETTER("wletter"),
     ILETTER("iletter"),
+    CLETTER("cletter"),
+    HLETTER("hletter"),
+    GLETTER("gletter"),
+    NLETTER("hletter"),
+    MLETTER("mletter"),
+    LLETTER("lletter"),
+    PLETTER("pletter"),
     SAPHIRERING ("saphirering"),
     SILVERRING("silverring"),
-    GOLDENRING("goldenring");
+    GOLDENRING("goldenring"),
+    HEART("heart");
 
 
     private final String tileName;

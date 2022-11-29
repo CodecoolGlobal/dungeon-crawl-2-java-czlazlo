@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/endgame.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -102,6 +102,27 @@ public class MapLoader {
                         case 'I':
                             cell.setType(CellType.ILETTER);
                             break;
+                        case 'C':
+                            cell.setType(CellType.CLETTER);
+                            break;
+                        case 'H':
+                            cell.setType(CellType.HLETTER);
+                            break;
+                        case 'G':
+                            cell.setType(CellType.GLETTER);
+                            break;
+                        case 'N':
+                            cell.setType(CellType.NLETTER);
+                            break;
+                        case 'M':
+                            cell.setType(CellType.MLETTER);
+                            break;
+                        case 'L':
+                            cell.setType(CellType.LLETTER);
+                            break;
+                        case 'P':
+                            cell.setType(CellType.PLETTER);
+                            break;
                         case '1':
                             cell.setType(CellType.GOLDENRING);
                             break;
@@ -110,6 +131,9 @@ public class MapLoader {
                             break;
                         case '3':
                             cell.setType(CellType.SILVERRING);
+                            break;
+                        case '4':
+                            cell.setType(CellType.HEART);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
