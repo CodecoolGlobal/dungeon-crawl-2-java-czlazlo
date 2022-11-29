@@ -1,5 +1,8 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
+import com.codecool.dungeoncrawl.logic.items.Armor;
+import com.codecool.dungeoncrawl.logic.items.Items;
+
 import java.util.ArrayList;
 
 public class Inventory{
