@@ -42,6 +42,21 @@ public class MapLoader {
                         case 'd':
                             cell.setType(CellType.DOOR);
                             break;
+                        case 'w':
+                            cell.setType(CellType.WATER);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.PINE);
+                            break;
+                        case 't':
+                            cell.setType(CellType.TREE);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.HP);
+                            break;
+                        case 'k':
+                            cell.setType(CellType.KEY);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
