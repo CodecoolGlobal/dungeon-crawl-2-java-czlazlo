@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/endgame.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -56,6 +56,60 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.KEY);
+                            break;
+                        case 'q':
+                            cell.setType(CellType.QUEEN);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GLAIVE);
+                            break;
+                        case 'Y':
+                            cell.setType(CellType.YLETTER);
+                            break;
+                        case 'O':
+                            cell.setType(CellType.OLETTER);
+                            break;
+                        case 'U':
+                            cell.setType(CellType.ULETTER);
+                            break;
+                        case 'S':
+                            cell.setType(CellType.SLETTER);
+                            break;
+                        case 'A':
+                            cell.setType(CellType.ALETTER);
+                            break;
+                        case 'V':
+                            cell.setType(CellType.VLETTER);
+                            break;
+                        case 'E':
+                            cell.setType(CellType.ELETTER);
+                            break;
+                        case 'D':
+                            cell.setType(CellType.DLETTER);
+                            break;
+                        case 'R':
+                            cell.setType(CellType.RLETTER);
+                            break;
+                        case 'F':
+                            cell.setType(CellType.FLETTER);
+                            break;
+                        case 'T':
+                            cell.setType(CellType.TLETTER);
+                            break;
+                        case 'W':
+                            cell.setType(CellType.WLETTER);
+                            break;
+                        case 'I':
+                            cell.setType(CellType.ILETTER);
+                            break;
+                        case '1':
+                            cell.setType(CellType.GOLDENRING);
+                            break;
+                        case '2':
+                            cell.setType(CellType.SAPHIRERING);
+                            break;
+                        case '3':
+                            cell.setType(CellType.SILVERRING);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

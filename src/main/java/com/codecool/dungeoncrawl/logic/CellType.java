@@ -10,7 +10,26 @@ public enum CellType {
     PINE("pine"),
     STONE("stone"),
     WATER("water"),
-    KEY("key");
+    KEY("key"),
+    GLAIVE("glaive"),
+    QUEEN("queen"),
+    YLETTER("yletter"),
+    OLETTER("oletter"),
+    ULETTER("uletter"),
+    SLETTER("sletter"),
+    ALETTER("aletter"),
+    VLETTER("vletter"),
+    ELETTER("eletter"),
+    DLETTER("dletter"),
+    RLETTER("rletter"),
+    FLETTER("fletter"),
+    TLETTER("tletter"),
+    WLETTER("wletter"),
+    ILETTER("iletter"),
+    SAPHIRERING ("saphirering"),
+    SILVERRING("silverring"),
+    GOLDENRING("goldenring");
+
 
     private final String tileName;
 

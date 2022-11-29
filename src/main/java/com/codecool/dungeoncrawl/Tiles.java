@@ -35,6 +35,37 @@ public class Tiles {
         tileMap.put("stone", new Tile(5,2));
         tileMap.put("water", new Tile(8,4));
         tileMap.put("key", new Tile(16,23));
+        tileMap.put("queen", new Tile(31,10));
+        tileMap.put("glaive", new Tile(10,30));
+        tileMap.put("yletter", new Tile(30,31));
+        tileMap.put("oletter", new Tile(20,31));
+        tileMap.put("uletter", new Tile(26,31));
+        tileMap.put("sletter", new Tile(24,31));
+        tileMap.put("aletter", new Tile(19,30));
+        tileMap.put("vletter", new Tile(27,31));
+        tileMap.put("eletter", new Tile(23,30));
+        tileMap.put("dletter", new Tile(22,30));
+        tileMap.put("rletter", new Tile(23,31));
+        tileMap.put("fletter", new Tile(24,30));
+        tileMap.put("tletter", new Tile(25,31));
+        tileMap.put("wletter", new Tile(28,31));
+        tileMap.put("iletter", new Tile(27,30));
+        tileMap.put("goldenring", new Tile(13,28));
+        tileMap.put("silverring", new Tile(12,28));
+        tileMap.put("saphirering", new Tile(14,28));
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
