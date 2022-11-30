@@ -1,8 +1,9 @@
 package com.codecool.dungeoncrawl;
-
+import java.util.Random;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Skeleton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -16,6 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    public int getRandomInteger(){
+        Random random = new Random();
+        return random.nextInt(2);
+    }
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -53,19 +58,27 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                map.getPlayer().move(0, -1);
+                map.getPlayer().move(0,-1);
+                map.getPlayer().attack(0,-1);
+                map.getSkeleton().attack(0,1);
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
+                map.getPlayer().attack(0,1);
+                map.getSkeleton().attack(0,-1);
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                map.getPlayer().attack(-1,0);
+                map.getSkeleton().attack(1,0);
                 refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1,0);
+                map.getPlayer().attack(1,0);
+                map.getSkeleton().attack(-1,0);
                 refresh();
                 break;
         }
