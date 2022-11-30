@@ -4,11 +4,18 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 
 public class Player extends Actor {
+    public Inventory gameInventory;
+
+
     public Player(Cell cell) {
         super(cell);
         this.setEnemy();
         this.setDmg(10);
         this.setHealth(10);
+        gameInventory = new Inventory();
+    }
+    public String readInventory(){
+        return gameInventory.toString();
     }
 
     public String getTileName() {

@@ -1,9 +1,13 @@
 package com.codecool.dungeoncrawl;
-import java.util.Random;
+
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.items.Armor;
+import com.codecool.dungeoncrawl.logic.items.Items;
+import com.codecool.dungeoncrawl.logic.items.Key;
+import com.codecool.dungeoncrawl.logic.items.Sword;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,8 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 public class Main extends Application {
     public int getRandomInteger(){
@@ -27,6 +33,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -34,12 +41,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        map.getPlayer().gameInventory.addItem(new Sword("Edge_of_night"));
+        map.getPlayer().gameInventory.addItem(new Armor("Frozen_heart"));
+        map.getPlayer().gameInventory.addItem(new Key("Key_of_doom"));
         GridPane ui = new GridPane();
+        Text text = new Text();
+        text.setText(map.getPlayer().readInventory());
+        VBox vbox = new VBox(text);
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Inventory Contents: "), 0, 5);
+        ui.add(inventoryLabel, 0, 7);
+        ui.add(vbox, 0, 8);
+
+
 
         BorderPane borderPane = new BorderPane();
 
