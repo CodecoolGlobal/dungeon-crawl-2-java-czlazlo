@@ -22,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.util.Random;
+
 public class Main extends Application {
     public int getRandomInteger(){
         Random random = new Random();
@@ -62,7 +64,7 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        borderPane.setBottom(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
