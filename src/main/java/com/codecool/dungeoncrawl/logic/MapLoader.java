@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/winmap.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/losemap.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -62,6 +62,9 @@ public class MapLoader {
                             break;
                         case 'g':
                             cell.setType(CellType.GLAIVE);
+                            break;
+                        case '?':
+                            cell.setType(CellType.QMARK);
                             break;
                         case 'Y':
                             cell.setType(CellType.YLETTER);

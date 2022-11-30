@@ -36,6 +36,7 @@ public class Tiles {
         tileMap.put("water", new Tile(8,4));
         tileMap.put("key", new Tile(16,23));
         tileMap.put("queen", new Tile(31,10));
+        tileMap.put("qmark", new Tile (21,25));
         tileMap.put("glaive", new Tile(10,30));
         tileMap.put("yletter", new Tile(30,31));
         tileMap.put("oletter", new Tile(20,31));

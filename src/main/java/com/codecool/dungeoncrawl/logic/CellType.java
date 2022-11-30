@@ -13,6 +13,7 @@ public enum CellType {
     KEY("key"),
     GLAIVE("glaive"),
     QUEEN("queen"),
+    QMARK("qmark"),
     YLETTER("yletter"),
     OLETTER("oletter"),
     ULETTER("uletter"),
