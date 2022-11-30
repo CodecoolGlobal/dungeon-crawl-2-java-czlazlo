@@ -1,6 +1,5 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
-import com.codecool.dungeoncrawl.logic.items.Armor;
 import com.codecool.dungeoncrawl.logic.items.Items;
 
 import java.util.ArrayList;
@@ -14,12 +13,13 @@ public class Inventory{
         gameInventory = new ArrayList<>();
     }
 
-    public String getItemsString(){
+    public StringBuilder getItemsString(){
         StringBuilder items = new StringBuilder();
         for (Items item : gameInventory) {
             items.append(item.getName());
+            items.append(", ");
         }
-        return items.toString();
+        return items;
     }
     public void addItem(Items item) {
         gameInventory.add(item);
@@ -29,4 +29,8 @@ public class Inventory{
         gameInventory.remove(item);
     }
 
+    @Override
+    public String toString() {
+        return "Inventory " + getItemsString();
+    }
 }

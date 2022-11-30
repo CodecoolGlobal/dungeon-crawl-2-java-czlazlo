@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -35,22 +36,28 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        map.getPlayer().gameInventory.addItem(new Sword("Edge_of_night"));
+        map.getPlayer().gameInventory.addItem(new Armor("Frozen_heart"));
+        map.getPlayer().gameInventory.addItem(new Key("Key_of_doom"));
         GridPane ui = new GridPane();
+        Text text = new Text();
+        text.setText(map.getPlayer().readInventory());
+        VBox vbox = new VBox(text);
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(20));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
-        ui.add(new Label("Inventory Contents: "), 0,5);
+        ui.add(new Label("Inventory Contents: "), 0, 5);
         ui.add(inventoryLabel, 0, 7);
+        ui.add(vbox, 0, 8);
 
-        map.getPlayer().gameInventory.addItem(new Sword("Edge_of_night"));
-        map.getPlayer().gameInventory.addItem(new Armor("Frozen_heart"));
-        map.getPlayer().gameInventory.addItem(new Key("Key_of_doom"));
+
+
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        borderPane.setBottom(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -96,9 +103,5 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
-        inventoryLabel.setText(map.getPlayer().readInventory());
-//        for (Label itemLabel:inventoryLabel) {
-//            itemLabel.setText(map.getPlayer().readInventory());
-//        }
     }
 }

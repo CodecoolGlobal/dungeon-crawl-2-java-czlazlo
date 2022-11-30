@@ -9,14 +9,13 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         gameInventory = new Inventory();
-
     }
     public String readInventory(){
-        return gameInventory.getItemsString();
+        return gameInventory.toString();
     }
-
 
     public String getTileName() {
         return "player";
     }
+
 }
