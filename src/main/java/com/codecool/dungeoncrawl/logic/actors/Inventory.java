@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
+import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Items;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class Inventory{
         }
         return items;
     }
+
+
     public void addItem(Items item) {
         gameInventory.add(item);
     }

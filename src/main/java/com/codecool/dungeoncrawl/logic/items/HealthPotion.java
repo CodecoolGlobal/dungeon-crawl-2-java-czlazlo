@@ -2,11 +2,11 @@ package com.codecool.dungeoncrawl.logic.items;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 
-public class Armor extends Items{
-    public Armor(Cell cell) {
-        super("armor",cell);
-    }
+public class HealthPotion extends Items{
 
+    public HealthPotion(Cell cell) {
+        super("hp",cell);
+    }
 
     @Override
     public String getName() {
@@ -15,6 +15,6 @@ public class Armor extends Items{
 
     @Override
     public String getTileName() {
-        return "armor";
+        return "potion";
     }
 }

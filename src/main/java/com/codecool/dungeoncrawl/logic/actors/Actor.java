@@ -19,13 +19,16 @@ public abstract class Actor implements Drawable {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell.getType() != CellType.WALL &&
+                nextCell.getType() != CellType.TREE &&
+                nextCell.getType() != CellType.PINE &&
+                nextCell.getType() != CellType.WATER &&
             nextCell.getActor() == null) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
         }
-
     }
+
 
     public int getHealth() {
         return health;
@@ -77,6 +80,9 @@ public abstract class Actor implements Drawable {
             setDeath();
         }
     }
+    public void increaseHealth(int heal){
+        health += heal;
+    }
 
     public void attack(int dx, int dy){
         Actor target = cell.getNeighbor(dx, dy).getActor();
@@ -87,5 +93,9 @@ public abstract class Actor implements Drawable {
 
     public void setDeath(){
             cell.setActor(null);
+    }
+
+    public void drinkHealthPotion(){
+        increaseHealth(10);
     }
 }
