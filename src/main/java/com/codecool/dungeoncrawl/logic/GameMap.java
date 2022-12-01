@@ -14,7 +14,7 @@ public class GameMap {
 
     private Player player;
 
-    private Skeleton skeleton;
+    private ArrayList<Skeleton> skeletons = new ArrayList<>();
 
     private Scrab scrab;
 
@@ -51,12 +51,12 @@ public class GameMap {
         return height;
     }
 
-    public Skeleton getSkeleton() {
-        return skeleton;
+    public ArrayList<Skeleton> getSkeletons() {
+        return skeletons;
     }
 
-    public void setSkeleton(Skeleton skeleton) {
-        this.skeleton = skeleton;
+    public void addSkeleton(Skeleton skeleton) {
+        this.skeletons.add(skeleton);
     }
 
     public Scrab getScrab() {

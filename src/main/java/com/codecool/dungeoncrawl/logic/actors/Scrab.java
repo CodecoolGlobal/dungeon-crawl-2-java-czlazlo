@@ -19,4 +19,9 @@ public class Scrab extends Actor{
     public void move(int dx, int dy) {
 
     }
+
+    @Override
+    public void act() {
+
+    }
 }

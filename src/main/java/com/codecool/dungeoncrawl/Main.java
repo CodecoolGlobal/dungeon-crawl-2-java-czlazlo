@@ -4,11 +4,6 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
-import com.codecool.dungeoncrawl.logic.items.Armor;
-import com.codecool.dungeoncrawl.logic.items.Items;
-import com.codecool.dungeoncrawl.logic.items.Key;
-import com.codecool.dungeoncrawl.logic.items.Sword;
-import com.codecool.dungeoncrawl.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,10 +21,7 @@ import javafx.scene.text.Text;
 import java.util.Random;
 
 public class Main extends Application {
-    public int getRandomInteger() {
-        Random random = new Random();
-        return random.nextInt(2);
-    }
+
     GameMap map = MapLoader.loadMap("/map1.txt");
 
 
@@ -74,32 +66,27 @@ public class Main extends Application {
             case UP:
                 map.getPlayer().move(0, -1);
                 map.getPlayer().attack(0, -1);
-                map.getSkeleton().attack(0, 1);
-                refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
                 map.getPlayer().attack(0, 1);
-                map.getSkeleton().attack(0, -1);
-                refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
                 map.getPlayer().attack(-1, 0);
-                map.getSkeleton().attack(1, 0);
-                refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
                 map.getPlayer().attack(1, 0);
-                map.getSkeleton().attack(-1, 0);
-                refresh();
                 break;
             case SPACE:
                 map.getPlayer().pickUp(0, 0);
-                refresh();
                 break;
         }
+        for (Skeleton skeleton : map.getSkeletons()) {
+            skeleton.act();
+        }
+        refresh();
     }
 
     private void refresh() {

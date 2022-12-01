@@ -26,4 +26,9 @@ public class Skeleton extends Actor {
             cell = nextCell;
         }
     }
+
+    @Override
+    public void act() {
+        move(0,-1);
+    }
 }

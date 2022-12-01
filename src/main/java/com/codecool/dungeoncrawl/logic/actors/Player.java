@@ -36,6 +36,12 @@ public class Player extends Actor {
             cell = nextCell;
         }
     }
+
+    @Override
+    public void act() {
+
+    }
+
     public void pickUp(int dx, int dy) {
         Cell targetItem = cell.getNeighbor(dx, dy);
         if (targetItem.getType() == CellType.HP || targetItem.getType() == CellType.KEY) {
