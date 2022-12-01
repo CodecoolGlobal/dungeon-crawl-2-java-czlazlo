@@ -1,6 +1,8 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
+import com.codecool.dungeoncrawl.logic.Direction;
 
 public class Batman extends Actor {
     public Batman(Cell cell) {
@@ -14,8 +16,10 @@ public class Batman extends Actor {
         return "Batman";
     }
 
-    @Override
-    public void move(int dx, int dy) {
 
+    @Override
+    public void act() {
+        Direction randomDirection = Direction.getRandom();
+        move(randomDirection.getDx(), randomDirection.getDy());
     }
 }

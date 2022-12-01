@@ -13,6 +13,8 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import com.codecool.dungeoncrawl.logic.actors.Actor;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -27,10 +29,6 @@ import javafx.scene.text.Text;
 import java.util.Random;
 
 public class Main extends Application {
-    public int getRandomInteger() {
-        Random random = new Random();
-        return random.nextInt(2);
-    }
 
 
     public void setMap(GameMap map) {
@@ -76,31 +74,32 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
                 map.getPlayer().attack(0, -1);
-                map.getSkeleton().attack(0, 1);
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
                 map.getPlayer().attack(0, 1);
-                map.getSkeleton().attack(0, -1);
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
                 map.getPlayer().attack(-1, 0);
-                map.getSkeleton().attack(1, 0);
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
                 map.getPlayer().attack(1, 0);
-                map.getSkeleton().attack(-1, 0);
                 break;
             case SPACE:
                 map.getPlayer().pickUp(0, 0);
+                break;
+        }
+        for (Actor monster : map.getMonsters()) {
+            monster.act();
+        }
+        refresh();
                 break;
         }
 
@@ -145,4 +144,6 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
         inventoryLabel.setText(map.getPlayer().readInventory());
     }
+
+
 }

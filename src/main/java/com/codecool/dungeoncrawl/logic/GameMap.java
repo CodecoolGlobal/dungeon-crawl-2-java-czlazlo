@@ -1,11 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.logic.actors.Batman;
-import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.Scrab;
-import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.actors.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GameMap {
     private int width;
@@ -14,11 +12,16 @@ public class GameMap {
 
     private Player player;
 
-    private Skeleton skeleton;
+    private ArrayList<Skeleton> skeletons = new ArrayList<>();
+    private ArrayList<Batman> batmen = new ArrayList<>();
+    private ArrayList<Scrab> scrabs = new ArrayList<>();
+
+    public void addScrabs(Scrab scrab) {
+        this.scrabs.add(scrab);
+    }
 
     private Scrab scrab;
 
-    private Batman batman;
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -51,12 +54,12 @@ public class GameMap {
         return height;
     }
 
-    public Skeleton getSkeleton() {
-        return skeleton;
+    public ArrayList<Skeleton> getSkeletons() {
+        return skeletons;
     }
 
-    public void setSkeleton(Skeleton skeleton) {
-        this.skeleton = skeleton;
+    public void addSkeleton(Skeleton skeleton) {
+        this.skeletons.add(skeleton);
     }
 
     public Scrab getScrab() {
@@ -67,11 +70,18 @@ public class GameMap {
         this.scrab = scrab;
     }
 
-    public Batman getBatman() {
-        return batman;
+    public ArrayList<Batman> getBatmen() {
+        return batmen;
     }
 
-    public void setBatman(Batman batman) {
-        this.batman = batman;
+    public void addBatman(Batman batman) {
+        this.batmen.add(batman);
+    }
+    public Collection<Actor> getMonsters(){
+        ArrayList<Actor> monsters = new ArrayList<>();
+        monsters.addAll(skeletons);
+        monsters.addAll(batmen);
+        monsters.addAll(scrabs);
+        return monsters;
     }
 }

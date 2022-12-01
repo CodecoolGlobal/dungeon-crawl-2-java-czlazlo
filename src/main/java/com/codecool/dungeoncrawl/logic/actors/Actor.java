@@ -26,8 +26,12 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+        } else if (nextCell.getActor() instanceof Player) {
+            attack(dx,dy);
         }
     }
+
+    public abstract void act();
 
 
     public int getHealth() {
