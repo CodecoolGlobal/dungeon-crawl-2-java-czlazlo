@@ -148,11 +148,11 @@ public class MapLoader {
                             cell.setType(CellType.HEART);
                             break;
                         case 'b':
-                            cell.setType(CellType.B);
-                            map.setScrab(new Scrab(cell));
+                            cell.setType(CellType.FLOOR);
+                            map.addScrabs(new Scrab(cell));
                             break;
                         case 'u':
-                            cell.setType(CellType.U);
+                            cell.setType(CellType.FLOOR);
                             map.addBatman(new Batman(cell));
                             break;
                         default:

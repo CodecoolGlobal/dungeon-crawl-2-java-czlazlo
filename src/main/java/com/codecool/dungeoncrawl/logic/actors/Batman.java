@@ -16,16 +16,6 @@ public class Batman extends Actor {
         return "Batman";
     }
 
-    @Override
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getType() != CellType.WALL &&
-                nextCell.getActor() == null) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
-    }
 
     @Override
     public void act() {

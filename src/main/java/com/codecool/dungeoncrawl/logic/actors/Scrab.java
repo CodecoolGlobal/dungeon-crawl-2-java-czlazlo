@@ -15,13 +15,9 @@ public class Scrab extends Actor{
         return "scrab";
     }
 
-    @Override
-    public void move(int dx, int dy) {
-
-    }
 
     @Override
     public void act() {
-
+        move(1,0);
     }
 }

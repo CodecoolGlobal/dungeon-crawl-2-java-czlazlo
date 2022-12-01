@@ -14,6 +14,11 @@ public class GameMap {
 
     private ArrayList<Skeleton> skeletons = new ArrayList<>();
     private ArrayList<Batman> batmen = new ArrayList<>();
+    private ArrayList<Scrab> scrabs = new ArrayList<>();
+
+    public void addScrabs(Scrab scrab) {
+        this.scrabs.add(scrab);
+    }
 
     private Scrab scrab;
 
@@ -76,6 +81,7 @@ public class GameMap {
         ArrayList<Actor> monsters = new ArrayList<>();
         monsters.addAll(skeletons);
         monsters.addAll(batmen);
+        monsters.addAll(scrabs);
         return monsters;
     }
 }
