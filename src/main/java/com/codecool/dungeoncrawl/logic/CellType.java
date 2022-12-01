@@ -41,6 +41,7 @@ public enum CellType {
     SILVERRING("silverring"),
     GOLDENRING("goldenring"),
     HEART("heart"),
+    Z("seconddoor"),
     ITEM("item");
 
     private final String tileName;

@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
@@ -30,7 +31,12 @@ public class Main extends Application {
         Random random = new Random();
         return random.nextInt(2);
     }
-    GameMap map = MapLoader.loadMap("/map1.txt");
+
+    public void setMap(GameMap map) {
+        this.map = map;
+    }
+
+    GameMap map = MapLoader.loadMap("/map.txt");
 
 
     Canvas canvas = new Canvas(
@@ -69,38 +75,58 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
                 map.getPlayer().attack(0, -1);
                 map.getSkeleton().attack(0, 1);
-                refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
                 map.getPlayer().attack(0, 1);
                 map.getSkeleton().attack(0, -1);
-                refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
                 map.getPlayer().attack(-1, 0);
                 map.getSkeleton().attack(1, 0);
-                refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
                 map.getPlayer().attack(1, 0);
                 map.getSkeleton().attack(-1, 0);
-                refresh();
                 break;
             case SPACE:
                 map.getPlayer().pickUp(0, 0);
-                refresh();
                 break;
         }
+
+        checkMapLoad();
+        refresh();
     }
+
+    public void checkMapLoad() {
+        if(map.getPlayer().getCell().getType() == CellType.DOOR){
+            setMap(MapLoader.loadMap("/map1.txt"));
+
+        } else if (map.getPlayer().getCell().getType() == CellType.Z) {
+            setMap(MapLoader.loadMap("/endgame.txt"));
+
+        } else if (map.getPlayer().getCell().getType() == CellType.SAPHIRERING) {
+            setMap(MapLoader.loadMap("/winmap.txt"));
+
+
+        } else if (map.getPlayer().getCell().getType() == CellType.GOLDENRING || map.getPlayer().getCell().getType() == CellType.SILVERRING ) {
+            setMap(MapLoader.loadMap("/losemap.txt"));
+
+        }
+
+
+    }
+
+
 
     private void refresh() {
         context.setFill(Color.BLACK);

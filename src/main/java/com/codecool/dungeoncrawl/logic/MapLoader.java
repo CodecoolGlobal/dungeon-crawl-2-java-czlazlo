@@ -155,6 +155,9 @@ public class MapLoader {
                             cell.setType(CellType.U);
                             map.setBatman(new Batman(cell));
                             break;
+                        case 'Z':
+                            cell.setType(CellType.Z);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

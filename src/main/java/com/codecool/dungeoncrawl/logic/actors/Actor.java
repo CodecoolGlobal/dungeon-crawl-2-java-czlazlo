@@ -85,7 +85,7 @@ public abstract class Actor implements Drawable {
     }
 
     public void attack(int dx, int dy){
-        Actor target = cell.getNeighbor(dx, dy).getActor();
+         Actor target = cell.getNeighbor(dx, dy).getActor();
          if (target != null && target.isEnemy() != this.isEnemy()) {
             target.decreaseHealth(dmg);
         }
