@@ -30,7 +30,7 @@ public class Ghost extends Actor{
     public void act() {
         Direction randomDirection = Direction.getRandom();
         move(randomDirection.getDx(), randomDirection.getDy());
-        move(randomDirection.getDx(), randomDirection.getDy());
+
 
     }
 }
