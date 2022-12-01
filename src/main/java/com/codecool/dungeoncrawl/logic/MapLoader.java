@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map1.txt");
+    public static GameMap loadMap(String url) {
+        InputStream is = MapLoader.class.getResourceAsStream(url);
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -158,6 +158,10 @@ public class MapLoader {
             }
         }
         return map;
+    }
+
+    public void giveTheRing(){
+
     }
 
 }

@@ -30,7 +30,7 @@ public class Main extends Application {
         Random random = new Random();
         return random.nextInt(2);
     }
-    GameMap map = MapLoader.loadMap();
+    GameMap map = MapLoader.loadMap("/map1.txt");
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -120,4 +120,6 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
+
+
 }
