@@ -37,7 +37,7 @@ public class Player extends Actor {
         Cell targetItem = cell.getNeighbor(dx, dy);
         if (targetItem.getType() == CellType.HP || targetItem.getType() == CellType.KEY) {
             gameInventory.addItem(targetItem.getItems());
-            System.out.println(targetItem.getItems());
+            drinkHealthPotion();
             targetItem.setType(CellType.FLOOR);
         }
     }

@@ -22,6 +22,8 @@ public class Inventory{
         }
         return items;
     }
+
+
     public void addItem(Items item) {
         gameInventory.add(item);
     }
