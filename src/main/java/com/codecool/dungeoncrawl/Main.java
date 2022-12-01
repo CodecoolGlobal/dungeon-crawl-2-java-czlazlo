@@ -32,6 +32,7 @@ public class Main extends Application {
         return random.nextInt(2);
     }
 
+
     public void setMap(GameMap map) {
         this.map = map;
     }
@@ -144,6 +145,4 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
         inventoryLabel.setText(map.getPlayer().readInventory());
     }
-
-
 }
