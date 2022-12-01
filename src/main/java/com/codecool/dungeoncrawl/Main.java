@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -83,8 +84,8 @@ public class Main extends Application {
                 map.getPlayer().pickUp(0, 0);
                 break;
         }
-        for (Skeleton skeleton : map.getSkeletons()) {
-            skeleton.act();
+        for (Actor monster : map.getMonsters()) {
+            monster.act();
         }
         refresh();
     }

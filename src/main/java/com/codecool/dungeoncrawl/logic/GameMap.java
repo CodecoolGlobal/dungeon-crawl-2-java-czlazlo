@@ -1,11 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.logic.actors.Batman;
-import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.Scrab;
-import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.actors.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GameMap {
     private int width;
@@ -73,5 +71,11 @@ public class GameMap {
 
     public void addBatman(Batman batman) {
         this.batmen.add(batman);
+    }
+    public Collection<Actor> getMonsters(){
+        ArrayList<Actor> monsters = new ArrayList<>();
+        monsters.addAll(skeletons);
+        monsters.addAll(batmen);
+        return monsters;
     }
 }
