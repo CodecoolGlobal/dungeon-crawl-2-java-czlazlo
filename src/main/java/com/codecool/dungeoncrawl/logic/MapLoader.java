@@ -4,15 +4,14 @@ import com.codecool.dungeoncrawl.logic.actors.Batman;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Scrab;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
-import com.codecool.dungeoncrawl.logic.items.HealthPotion;
-import com.codecool.dungeoncrawl.logic.items.Key;
+import com.codecool.dungeoncrawl.logic.items.*;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(String url) {
-        InputStream is = MapLoader.class.getResourceAsStream(url);
+    public static GameMap loadMap() {
+        InputStream is = MapLoader.class.getResourceAsStream("/map1.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -57,6 +56,7 @@ public class MapLoader {
                             break;
                         case 'a':
                             cell.setType(CellType.ARMOR);
+                            cell.setItems(new Armor(cell));
                             break;
                         case 'h':
                             cell.setType(CellType.HP);
@@ -71,6 +71,7 @@ public class MapLoader {
                             break;
                         case 'g':
                             cell.setType(CellType.GLAIVE);
+                            cell.setItems(new Sword(cell));
                             break;
                         case '?':
                             cell.setType(CellType.QMARK);
@@ -137,12 +138,15 @@ public class MapLoader {
                             break;
                         case '1':
                             cell.setType(CellType.GOLDENRING);
+                            cell.setItems(new GoldenRing(cell));
                             break;
                         case '2':
                             cell.setType(CellType.SAPHIRERING);
+                            cell.setItems(new SaphireRing(cell));
                             break;
                         case '3':
                             cell.setType(CellType.SILVERRING);
+                            cell.setItems(new SilverRing(cell));
                             break;
                         case '4':
                             cell.setType(CellType.HEART);
