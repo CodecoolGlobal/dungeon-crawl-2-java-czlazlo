@@ -15,10 +15,10 @@ public class GameMap {
     private Player player;
 
     private ArrayList<Skeleton> skeletons = new ArrayList<>();
+    private ArrayList<Batman> batmen = new ArrayList<>();
 
     private Scrab scrab;
 
-    private Batman batman;
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -67,11 +67,11 @@ public class GameMap {
         this.scrab = scrab;
     }
 
-    public Batman getBatman() {
-        return batman;
+    public ArrayList<Batman> getBatmen() {
+        return batmen;
     }
 
-    public void setBatman(Batman batman) {
-        this.batman = batman;
+    public void addBatman(Batman batman) {
+        this.batmen.add(batman);
     }
 }
