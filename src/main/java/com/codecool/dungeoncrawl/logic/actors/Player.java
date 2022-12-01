@@ -42,10 +42,13 @@ public class Player extends Actor {
     }
     public void pickUp(int dx, int dy) {
         Cell targetItem = cell.getNeighbor(dx, dy);
-        if (targetItem.getType() == CellType.HP || targetItem.getType() == CellType.KEY
+        if (targetItem.getType() == CellType.KEY
         || targetItem.getType()== CellType.ARMOR || targetItem.getType()== CellType.GLAIVE) {
             gameInventory.addItem(targetItem.getItems());
             targetItem.setType(CellType.FLOOR);
+        } else if (targetItem.getType() == CellType.HP) {
+            targetItem.setType(CellType.FLOOR);
+            drinkHealthPotion();
         }
     }
 }
