@@ -23,6 +23,7 @@ public class Tiles {
     }
 
     static {
+        tileMap.put("ghost", new Tile(15,10));
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));

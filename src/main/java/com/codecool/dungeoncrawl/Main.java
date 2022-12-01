@@ -53,6 +53,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
         Text text = new Text();
         VBox vbox = new VBox(text);
