@@ -63,6 +63,9 @@ public class Tiles {
         tileMap.put("silverring", new Tile(12,28));
         tileMap.put("saphirering", new Tile(14,28));
         tileMap.put("heart", new Tile(23,22));
+        tileMap.put("scrab", new Tile(25,5));
+        tileMap.put("batman", new Tile(26,8));
+        tileMap.put("armor", new Tile (4,22));
 
     }
 
