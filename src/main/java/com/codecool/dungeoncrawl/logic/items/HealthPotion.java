@@ -4,8 +4,8 @@ import com.codecool.dungeoncrawl.logic.Cell;
 
 public class HealthPotion extends Items{
 
-    public HealthPotion(String name, Cell cell) {
-        super(name, cell);
+    public HealthPotion(Cell cell) {
+        super("hp",cell);
     }
 
     @Override

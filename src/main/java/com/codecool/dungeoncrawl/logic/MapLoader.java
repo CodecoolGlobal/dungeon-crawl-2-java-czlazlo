@@ -4,6 +4,8 @@ import com.codecool.dungeoncrawl.logic.actors.Batman;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Scrab;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.items.HealthPotion;
+import com.codecool.dungeoncrawl.logic.items.Key;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -55,9 +57,11 @@ public class MapLoader {
                             break;
                         case 'h':
                             cell.setType(CellType.HP);
+                            cell.setItems(new HealthPotion(cell));
                             break;
                         case 'k':
                             cell.setType(CellType.KEY);
+                            cell.setItems(new Key(cell));
                             break;
                         case 'q':
                             cell.setType(CellType.QUEEN);
