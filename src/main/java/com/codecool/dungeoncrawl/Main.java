@@ -26,10 +26,11 @@ import javafx.scene.text.Text;
 import java.util.Random;
 
 public class Main extends Application {
-    public int getRandomInteger(){
+    public int getRandomInteger() {
         Random random = new Random();
         return random.nextInt(2);
     }
+
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -44,24 +45,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        map.getPlayer().gameInventory.addItem(new Sword("Edge_of_night"));
-        map.getPlayer().gameInventory.addItem(new Armor("Frozen_heart"));
-        map.getPlayer().gameInventory.addItem(new Key("Key_of_doom"));
         GridPane ui = new GridPane();
         Text text = new Text();
-        text.setText(map.getPlayer().readInventory());
         VBox vbox = new VBox(text);
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
-        ui.add(new Label("Inventory Contents: "), 0, 5);
         ui.add(inventoryLabel, 0, 7);
-        ui.add(vbox, 0, 8);
-
-
-
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -79,27 +71,31 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                map.getPlayer().move(0,-1);
-                map.getPlayer().attack(0,-1);
-                map.getSkeleton().attack(0,1);
+                map.getPlayer().move(0, -1);
+                map.getPlayer().attack(0, -1);
+                map.getSkeleton().attack(0, 1);
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
-                map.getPlayer().attack(0,1);
-                map.getSkeleton().attack(0,-1);
+                map.getPlayer().attack(0, 1);
+                map.getSkeleton().attack(0, -1);
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
-                map.getPlayer().attack(-1,0);
-                map.getSkeleton().attack(1,0);
+                map.getPlayer().attack(-1, 0);
+                map.getSkeleton().attack(1, 0);
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
-                map.getPlayer().attack(1,0);
-                map.getSkeleton().attack(-1,0);
+                map.getPlayer().move(1, 0);
+                map.getPlayer().attack(1, 0);
+                map.getSkeleton().attack(-1, 0);
+                refresh();
+                break;
+            case SPACE:
+                map.getPlayer().pickUp(0, 0);
                 refresh();
                 break;
         }
@@ -119,5 +115,6 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        inventoryLabel.setText(map.getPlayer().readInventory());
     }
 }

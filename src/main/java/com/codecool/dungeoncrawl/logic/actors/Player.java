@@ -2,6 +2,9 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
+import com.codecool.dungeoncrawl.logic.items.Armor;
+import com.codecool.dungeoncrawl.logic.items.HealthPotion;
+import com.codecool.dungeoncrawl.logic.items.Items;
 
 public class Player extends Actor {
     public Inventory gameInventory;
@@ -28,6 +31,13 @@ public class Player extends Actor {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+        }
+    }
+    public void pickUp(int dx, int dy) {
+        Cell targetItem = cell.getNeighbor(dx, dy);
+        if (targetItem.getType() == CellType.HP || targetItem.getType() == CellType.KEY) {
+            gameInventory.addItem(targetItem.getItems());
+            targetItem.setType(CellType.FLOOR);
         }
     }
 }
