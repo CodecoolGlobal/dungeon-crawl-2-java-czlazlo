@@ -100,12 +100,13 @@ public class Main extends Application {
             monster.act();
         }
         refresh();
-                break;
-        }
-
         checkMapLoad();
-        refresh();
     }
+
+
+
+
+
 
     public void checkMapLoad() {
         if(map.getPlayer().getCell().getType() == CellType.DOOR){
