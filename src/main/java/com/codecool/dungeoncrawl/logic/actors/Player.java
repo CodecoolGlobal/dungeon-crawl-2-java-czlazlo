@@ -21,6 +21,10 @@ public class Player extends Actor {
         return gameInventory.toString();
     }
 
+    public String convertIntToString(int text){
+        return String.valueOf(text);
+    }
+
     public String getTileName() {
         return "player";
     }
@@ -36,19 +40,24 @@ public class Player extends Actor {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        } //lse if (nextCell.getType() == CellType.DOOR) {
-
-      //  }
+        }
     }
     public void pickUp(int dx, int dy) {
         Cell targetItem = cell.getNeighbor(dx, dy);
-        if (targetItem.getType() == CellType.KEY
-        || targetItem.getType()== CellType.ARMOR || targetItem.getType()== CellType.GLAIVE) {
+        if (targetItem.getType() == CellType.KEY) {
             gameInventory.addItem(targetItem.getItems());
             targetItem.setType(CellType.FLOOR);
         } else if (targetItem.getType() == CellType.HP) {
             targetItem.setType(CellType.FLOOR);
             drinkHealthPotion();
+        } else if (targetItem.getType() == CellType.ARMOR) {
+            gameInventory.addItem(targetItem.getItems());
+            targetItem.setType(CellType.FLOOR);
+            putOnArmor();
+        } else if (targetItem.getType()== CellType.GLAIVE) {
+            gameInventory.addItem(targetItem.getItems());
+            targetItem.setType(CellType.FLOOR);
+            wieldSword();
         }
     }
 }

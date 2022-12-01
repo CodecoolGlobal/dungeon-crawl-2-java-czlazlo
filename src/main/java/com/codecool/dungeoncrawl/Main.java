@@ -46,6 +46,8 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
+    Label armorLabel = new Label();
+    Label attackDmg = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -60,7 +62,12 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
+        ui.add(new Label("  Armor: "), 2, 0);
+        ui.add(new Label("  Damage: "), 4, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(armorLabel, 3, 0);
+        ui.add(attackDmg, 5, 0);
+
         ui.add(inventoryLabel, 0, 7);
         BorderPane borderPane = new BorderPane();
 
@@ -126,6 +133,9 @@ public class Main extends Application {
 
 
     }
+    public String convertIntToString(int text){
+        return String.valueOf(text);
+    }
 
 
 
@@ -144,5 +154,7 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
         inventoryLabel.setText(map.getPlayer().readInventory());
+        armorLabel.setText(convertIntToString(map.getPlayer().getArmor()));
+        attackDmg.setText(convertIntToString(map.getPlayer().getDmg()));
     }
 }
