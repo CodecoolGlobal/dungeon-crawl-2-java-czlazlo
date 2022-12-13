@@ -3,10 +3,12 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.items.Items;
 
+import java.beans.Transient;
+
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
-    private GameMap gameMap;
+    transient private GameMap gameMap;
     private int x, y;
 
     private Items items;

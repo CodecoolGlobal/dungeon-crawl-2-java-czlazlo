@@ -6,9 +6,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class GameMap {
+    public String gameState;
+
+    public String getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(String gameState) {
+        this.gameState = gameState;
+    }
+
     private int width;
     private int height;
-    private Cell[][] cells;
+    transient private Cell[][] cells;
 
     private Player player;
 
