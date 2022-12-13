@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
@@ -10,6 +11,7 @@ import com.codecool.dungeoncrawl.logic.items.Items;
 import com.codecool.dungeoncrawl.logic.items.Key;
 import com.codecool.dungeoncrawl.logic.items.Sword;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,6 +28,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class Main extends Application {
@@ -36,6 +41,15 @@ public class Main extends Application {
     }
 
     GameMap map = MapLoader.loadMap("/map.txt");
+
+    Gson gson = new Gson();
+
+    public void savePlayer () throws IOException {
+
+        gson.toJson(this.map.getPlayer(),new FileWriter("save.json"));
+
+    }
+
 
 
     Canvas canvas = new Canvas(
@@ -54,6 +68,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        savePlayer();
         setupDbManager();
         context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
@@ -162,7 +177,6 @@ public class Main extends Application {
     }
 
 
-    }
 
     private void setupDbManager() {
         dbManager = new GameDatabaseManager();

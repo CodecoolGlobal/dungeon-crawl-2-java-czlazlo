@@ -8,6 +8,7 @@ import com.codecool.dungeoncrawl.logic.items.Items;
 
 public class Player extends Actor {
     public Inventory gameInventory;
+    private String name;
 
 
     public Player(Cell cell) {
@@ -67,5 +68,9 @@ public class Player extends Actor {
             targetItem.setType(CellType.FLOOR);
             wieldSword();
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
