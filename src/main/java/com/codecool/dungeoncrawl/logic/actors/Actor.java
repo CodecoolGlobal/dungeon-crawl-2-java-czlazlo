@@ -16,8 +16,6 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
-
-
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell.getType() != CellType.WALL &&
@@ -107,7 +105,7 @@ public abstract class Actor implements Drawable {
     public void setDeath(){
             cell.setActor(null);
     }
-    
+
     public void drinkHealthPotion(){
         increaseHealth(10);
     }

@@ -46,6 +46,7 @@ public class Main extends Application {
     Label inventoryLabel = new Label();
     Label armorLabel = new Label();
     Label attackDmg = new Label();
+    GameDatabaseManager dbManager;
 
     public static void main(String[] args) {
         launch(args);
@@ -53,6 +54,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        setupDbManager();
         context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
         Text text = new Text();
@@ -160,4 +162,23 @@ public class Main extends Application {
     }
 
 
+    }
+
+    private void setupDbManager() {
+        dbManager = new GameDatabaseManager();
+        try {
+            dbManager.setup();
+        } catch (SQLException ex) {
+            System.out.println("Cannot connect to database.");
+        }
+    }
+
+    private void exit() {
+        try {
+            stop();
+        } catch (Exception e) {
+            System.exit(1);
+        }
+        System.exit(0);
+    }
 }
