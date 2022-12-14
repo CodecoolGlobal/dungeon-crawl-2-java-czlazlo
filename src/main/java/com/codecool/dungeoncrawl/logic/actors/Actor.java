@@ -12,6 +12,10 @@ public abstract class Actor implements Drawable {
     transient private boolean isEnemy = false;
     private int armor = 0;
 
+    public Actor(){
+
+    }
+
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);

@@ -18,7 +18,7 @@ public class GameMap {
 
     private int width;
     private int height;
-    transient private Cell[][] cells;
+    private Cell[][] cells;
 
     private Player player;
 

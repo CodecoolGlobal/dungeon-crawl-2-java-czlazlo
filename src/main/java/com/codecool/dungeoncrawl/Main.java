@@ -4,7 +4,10 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -21,6 +24,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -33,18 +39,20 @@ public class Main extends Application {
     GameMap map = MapLoader.loadMap("/map.txt");
 
     Gson gson = new Gson();
+    Gson gson1 = new GsonBuilder()
+            .registerTypeAdapter(Player.class, (InstanceCreator<Player>) type -> new Player(map.getCell(map.getPlayer().getX(),map.getPlayer().getY())))
+            .create();
 
     public void saveMap() {
-        System.out.println("savemap vagyok");
-        String gameState = gson.toJson(this.map);
-        map.setGameState(gameState);
-        System.out.println(gameState);
+        try {
+             gson.toJson(this.map, new FileWriter("save.json"));
+        } catch (IOException ioException) {
+            System.out.println("body");
+        }
     }
 
     public void loadMap() {
-        System.out.println("loadmap vagyok");
-        String gameState = map.getGameState();
-        GameMap savedMap = gson.fromJson(gameState, GameMap.class);
+        GameMap savedMap = gson.fromJson(map.getGameState(), GameMap.class);
         setMap(savedMap);
 
     }
@@ -68,7 +76,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage)  throws Exception{
         setupDbManager();
         context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
@@ -99,7 +107,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void onKeyPressed(KeyEvent keyEvent) {
+    private void onKeyPressed(KeyEvent keyEvent)  {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
