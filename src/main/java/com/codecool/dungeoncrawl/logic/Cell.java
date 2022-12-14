@@ -9,9 +9,9 @@ public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     transient private GameMap gameMap;
-    private int x, y;
+    transient private int x, y;
 
-    private Items items;
+    transient private Items items;
 
     public Items getItems() {
         return items;

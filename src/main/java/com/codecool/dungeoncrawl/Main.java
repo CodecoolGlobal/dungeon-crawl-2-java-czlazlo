@@ -21,6 +21,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -34,17 +37,16 @@ public class Main extends Application {
 
     Gson gson = new Gson();
 
-    public void saveMap() {
+    public void saveMap() throws IOException {
         System.out.println("savemap vagyok");
-        String gameState = gson.toJson(this.map);
-        map.setGameState(gameState);
-        System.out.println(gameState);
+        gson.toJson(this.map, new FileWriter("save.json"));
+
     }
 
     public void loadMap() {
         System.out.println("loadmap vagyok");
-        String gameState = map.getGameState();
-        GameMap savedMap = gson.fromJson(gameState, GameMap.class);
+        File gameState = new File("save.json");
+        GameMap savedMap = gson.fromJson(String.valueOf(gameState), GameMap.class);
         setMap(savedMap);
 
     }
@@ -68,7 +70,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage){
         setupDbManager();
         context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
@@ -93,13 +95,19 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
-        scene.setOnKeyPressed(this::onKeyPressed);
+        scene.setOnKeyPressed(keyEvent -> {
+            try {
+                onKeyPressed(keyEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
     }
 
-    private void onKeyPressed(KeyEvent keyEvent) {
+    private void onKeyPressed(KeyEvent keyEvent) throws IOException {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
