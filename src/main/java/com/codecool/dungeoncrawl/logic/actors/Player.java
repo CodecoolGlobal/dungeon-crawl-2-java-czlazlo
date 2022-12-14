@@ -8,7 +8,7 @@ import com.codecool.dungeoncrawl.logic.items.Items;
 
 public class Player extends Actor {
     public Inventory gameInventory;
-    transient private String name;
+    private String name;
 
 
     public Player(Cell cell) {
