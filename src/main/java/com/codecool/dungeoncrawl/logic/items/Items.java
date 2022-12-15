@@ -9,6 +9,9 @@ public abstract class Items implements Drawable {
 
     transient protected Cell cell;
 
+    public Cell getCell() {
+        return cell;
+    }
 
     public String getName() {
         return name;

@@ -20,7 +20,7 @@ public class GameMap {
     private int height;
     private Cell[][] cells;
 
-    private Player player;
+    transient private Player player;
 
     private ArrayList<Skeleton> skeletons = new ArrayList<>();
     private ArrayList<Batman> batmen = new ArrayList<>();
