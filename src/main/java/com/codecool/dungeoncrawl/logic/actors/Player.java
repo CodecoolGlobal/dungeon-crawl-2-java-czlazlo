@@ -8,6 +8,7 @@ import com.codecool.dungeoncrawl.logic.items.Items;
 
 public class Player extends Actor {
     public Inventory gameInventory;
+    private String name;
 
 
     public Player(Cell cell) {
@@ -17,21 +18,23 @@ public class Player extends Actor {
         this.setHealth(10);
         gameInventory = new Inventory();
     }
-    public String readInventory(){
+
+    public String readInventory() {
         return gameInventory.toString();
     }
 
-    public String convertIntToString(int text){
+    public String convertIntToString(int text) {
         return String.valueOf(text);
     }
 
     public String getTileName() {
         return "player";
     }
+
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        System.out.println(this.getX() + " "  + " "  +  this.getY());
+        System.out.println(this.getX() + " " + " " + this.getY());
         if (nextCell.getType() != CellType.WALL &&
                 nextCell.getType() != CellType.TREE &&
                 nextCell.getType() != CellType.PINE &&
@@ -42,7 +45,7 @@ public class Player extends Actor {
             cell = nextCell;
         } //lse if (nextCell.getType() == CellType.DOOR) {
 
-      //  }
+        //  }
     }
 
     @Override
@@ -62,10 +65,14 @@ public class Player extends Actor {
             gameInventory.addItem(targetItem.getItems());
             targetItem.setType(CellType.FLOOR);
             putOnArmor();
-        } else if (targetItem.getType()== CellType.GLAIVE) {
+        } else if (targetItem.getType() == CellType.GLAIVE) {
             gameInventory.addItem(targetItem.getItems());
             targetItem.setType(CellType.FLOOR);
             wieldSword();
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

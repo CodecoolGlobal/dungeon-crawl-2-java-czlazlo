@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
@@ -26,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 public class Main extends Application {
@@ -161,8 +163,6 @@ public class Main extends Application {
         attackDmg.setText(convertIntToString(map.getPlayer().getDmg()));
     }
 
-
-    }
 
     private void setupDbManager() {
         dbManager = new GameDatabaseManager();
