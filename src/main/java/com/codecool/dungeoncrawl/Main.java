@@ -11,6 +11,7 @@ import com.codecool.dungeoncrawl.logic.items.Items;
 import com.codecool.dungeoncrawl.logic.items.Key;
 import com.codecool.dungeoncrawl.logic.items.Sword;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -204,9 +205,6 @@ public class Main extends Application {
         inventoryLabel.setText(map.getPlayer().readInventory());
         armorLabel.setText(convertIntToString(map.getPlayer().getArmor()));
         attackDmg.setText(convertIntToString(map.getPlayer().getDmg()));
-    }
-
-
     }
 
     private void setupDbManager() {
