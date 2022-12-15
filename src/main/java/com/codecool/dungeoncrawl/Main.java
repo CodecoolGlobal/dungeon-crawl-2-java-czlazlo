@@ -20,10 +20,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import util.GsonBuilderFactory;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -35,21 +38,30 @@ public class Main extends Application {
 
     GameMap map = MapLoader.loadMap("/map.txt");
 
-    Gson gson = new Gson();
+    private final Gson gsonBuilder = GsonBuilderFactory.createGsonBuilder();
 
-    public void saveMap() throws IOException {
+    public void saveMap() {
         System.out.println("savemap vagyok");
-        gson.toJson(this.map, new FileWriter("save.json"));
+        try (FileWriter writer = new FileWriter("./src/main/resources/save.json")){
+            gsonBuilder.toJson(this.map, writer);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
-    public void loadMap() {
-        System.out.println("loadmap vagyok");
-        File gameState = new File("save.json");
-        GameMap savedMap = gson.fromJson(String.valueOf(gameState), GameMap.class);
-        setMap(savedMap);
+    public static GameMap getMapFromJson(Gson gson) {
+        try (BufferedReader reader = Files.newBufferedReader(
+                Paths.get("./src/main/resources/save.json")
+        )) {
+            return gson.fromJson(reader, GameMap.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 
 
 
@@ -70,7 +82,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws Exception {
         setupDbManager();
         context.setFill(Color.BLACK);
         GridPane ui = new GridPane();
@@ -95,19 +107,13 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
-        scene.setOnKeyPressed(keyEvent -> {
-            try {
-                onKeyPressed(keyEvent);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        scene.setOnKeyPressed(this::onKeyPressed);
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
     }
 
-    private void onKeyPressed(KeyEvent keyEvent) throws IOException {
+    private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
@@ -132,7 +138,7 @@ public class Main extends Application {
                 saveMap();
                 break;
             case F9:
-                loadMap();
+                map = getMapFromJson(gsonBuilder);
                 break;
 
 

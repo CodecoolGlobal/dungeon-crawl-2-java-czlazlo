@@ -10,6 +10,8 @@ import java.io.IOException;
 public class ToGson {
     Gson gson = new Gson();
 
+
+
     private static final Gson gsonBuilder = GsonBuilderFactory.createGsonBuilder();
 
     public void saveObject(Object object) throws IOException {

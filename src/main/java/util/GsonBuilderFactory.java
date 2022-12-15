@@ -8,11 +8,13 @@ import com.google.gson.GsonBuilder;
 
 public class GsonBuilderFactory {
 
+
     public static Gson createGsonBuilder(){
 
         RuntimeTypeAdapterFactory<Actor> ActorAdapterFactory
                 = RuntimeTypeAdapterFactory.of(Actor.class);
-
+//        ActorAdapterFactory.registerSubtype(Ghost.class, "Ghost");
+        ActorAdapterFactory.registerSubtype(Ghost.class, "Ghost");
         ActorAdapterFactory.registerSubtype(Skeleton.class, "Skeleton");
         ActorAdapterFactory.registerSubtype(Player.class, "Player");
 
@@ -22,7 +24,6 @@ public class GsonBuilderFactory {
         itemAdapterFactory.registerSubtype(Armor .class, "Armor");
         itemAdapterFactory.registerSubtype(Key .class, "Key");
         itemAdapterFactory.registerSubtype(HealthPotion .class, "HealthPotion");
-
         itemAdapterFactory.registerSubtype(Sword.class, "Sword");
 
         return new GsonBuilder()

@@ -6,7 +6,7 @@ import com.codecool.dungeoncrawl.logic.Drawable;
 
 public abstract class Actor implements Drawable {
 
-    transient protected Cell cell;
+    protected Cell cell;
     private int health = 10;
     protected int dmg = 10;
     transient private boolean isEnemy = false;
