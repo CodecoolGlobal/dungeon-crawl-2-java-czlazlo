@@ -29,7 +29,10 @@ public class Ghost extends Actor{
     @Override
     public void act() {
         Direction randomDirection = Direction.getRandom();
-        move(randomDirection.getDx(), randomDirection.getDy());
+        int dx = randomDirection.getDx();
+        int dy = randomDirection.getDy();
+
+        move(dx, dy);
 
 
     }

@@ -5,11 +5,15 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
 
 public abstract class Actor implements Drawable {
-    protected Cell cell;
+
+    transient protected Cell cell;
     private int health = 10;
     protected int dmg = 10;
-    private boolean isEnemy = false;
+    transient private boolean isEnemy = false;
     private int armor = 0;
+
+    public Actor() {
+    }
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -114,5 +118,9 @@ public abstract class Actor implements Drawable {
     }
     public void wieldSword(){
         increaseDmg(10);
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 }

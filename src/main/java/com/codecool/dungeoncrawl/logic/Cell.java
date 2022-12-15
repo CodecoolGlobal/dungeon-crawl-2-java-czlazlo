@@ -3,13 +3,15 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.items.Items;
 
+import java.beans.Transient;
+
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
-    private GameMap gameMap;
+    transient private GameMap gameMap;
     private int x, y;
 
-    private Items items;
+    transient private Items items;
 
     public Items getItems() {
         return items;
@@ -45,7 +47,7 @@ public class Cell implements Drawable {
     }
 
     public Cell getNeighbor(int dx, int dy) {
-        return gameMap.getCell(x + dx, y + dy);
+        return gameMap.getCell(Math.max(x + dx, 0), Math.max(y + dy, 0));
     }
 
     @Override
@@ -59,5 +61,9 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
+    }
+
+    public void setMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 }

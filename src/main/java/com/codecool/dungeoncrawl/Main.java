@@ -26,7 +26,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import util.GsonBuilderFactory;
 
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -38,6 +45,37 @@ public class Main extends Application {
     }
 
     GameMap map = MapLoader.loadMap("/map.txt");
+
+    private final Gson gsonBuilder = GsonBuilderFactory.createGsonBuilder();
+
+    public void saveMap() {
+        System.out.println("savemap vagyok");
+        try (FileWriter writer = new FileWriter("./src/main/resources/save.json")){
+            gsonBuilder.toJson(this.map, writer);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static GameMap readMapFromJson(Gson gson) {
+        try (BufferedReader reader = Files.newBufferedReader(
+                Paths.get("./src/main/resources/save.json")
+        )) {
+
+            GameMap gameMap = gson.fromJson(reader, GameMap.class);
+            gameMap.reset();
+            return gameMap;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+
 
 
     Canvas canvas = new Canvas(
@@ -107,6 +145,16 @@ public class Main extends Application {
             case SPACE:
                 map.getPlayer().pickUp(0, 0);
                 break;
+            case F6:
+                saveMap();
+                break;
+            case F9:
+//                setMap(MapLoader.loadMap("/map1.txt"));
+                this.map = readMapFromJson(gsonBuilder);
+//                setMap(readMapFromJson(gsonBuilder));
+                break;
+
+
         }
         for (Actor monster : map.getMonsters()) {
             monster.act();
@@ -114,11 +162,6 @@ public class Main extends Application {
         refresh();
         checkMapLoad();
     }
-
-
-
-
-
 
     public void checkMapLoad() {
         if(map.getPlayer().getCell().getType() == CellType.DOOR){
@@ -163,6 +206,8 @@ public class Main extends Application {
         attackDmg.setText(convertIntToString(map.getPlayer().getDmg()));
     }
 
+
+    }
 
     private void setupDbManager() {
         dbManager = new GameDatabaseManager();
