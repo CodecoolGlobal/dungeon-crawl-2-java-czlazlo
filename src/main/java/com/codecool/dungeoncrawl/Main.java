@@ -51,11 +51,14 @@ public class Main extends Application {
 
     }
 
-    public static GameMap getMapFromJson(Gson gson) {
+    public static GameMap readMapFromJson(Gson gson) {
         try (BufferedReader reader = Files.newBufferedReader(
                 Paths.get("./src/main/resources/save.json")
         )) {
-            return gson.fromJson(reader, GameMap.class);
+
+            GameMap gameMap = gson.fromJson(reader, GameMap.class);
+            gameMap.reset();
+            return gameMap;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -138,7 +141,9 @@ public class Main extends Application {
                 saveMap();
                 break;
             case F9:
-                map = getMapFromJson(gsonBuilder);
+//                setMap(MapLoader.loadMap("/map1.txt"));
+                this.map = readMapFromJson(gsonBuilder);
+//                setMap(readMapFromJson(gsonBuilder));
                 break;
 
 
@@ -149,11 +154,6 @@ public class Main extends Application {
         refresh();
         checkMapLoad();
     }
-
-
-
-
-
 
     public void checkMapLoad() {
         if(map.getPlayer().getCell().getType() == CellType.DOOR){

@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.actors.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class GameMap {
     public String gameState;
@@ -20,12 +21,12 @@ public class GameMap {
     private int height;
     private Cell[][] cells;
 
-    private Player player;
+    transient private Player player;
 
-    private ArrayList<Skeleton> skeletons = new ArrayList<>();
-    private ArrayList<Batman> batmen = new ArrayList<>();
-    private ArrayList<Scrab> scrabs = new ArrayList<>();
-    private ArrayList<Ghost> ghosts = new ArrayList<>();
+    transient private ArrayList<Skeleton> skeletons = new ArrayList<>();
+    transient private ArrayList<Batman> batmen = new ArrayList<>();
+    transient private ArrayList<Scrab> scrabs = new ArrayList<>();
+    transient private ArrayList<Ghost> ghosts = new ArrayList<>();
 
     public void addScrabs(Scrab scrab) {
         this.scrabs.add(scrab);
@@ -85,7 +86,9 @@ public class GameMap {
         return batmen;
     }
 
-    public ArrayList<Ghost> getGhosts(){return ghosts;}
+    public ArrayList<Ghost> getGhosts() {
+        return ghosts;
+    }
 
     public void addGhosts(Ghost ghost) {
         this.ghosts.add(ghost);
@@ -94,12 +97,40 @@ public class GameMap {
     public void addBatman(Batman batman) {
         this.batmen.add(batman);
     }
-    public Collection<Actor> getMonsters(){
-        ArrayList<Actor> monsters = new ArrayList<>();
+
+    public Collection<Actor> getMonsters() {
+        List<Actor> monsters = new ArrayList<>();
         monsters.addAll(skeletons);
         monsters.addAll(batmen);
         monsters.addAll(scrabs);
         monsters.addAll(ghosts);
         return monsters;
+    }
+
+    public void reset() {
+        skeletons = new ArrayList<>();
+        batmen = new ArrayList<>();
+        scrabs = new ArrayList<>();
+        ghosts = new ArrayList<>();
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.setMap(this);
+                var actor = cell.getActor();
+                if (actor != null) {
+                    actor.setCell(cell);
+                    if (actor instanceof Skeleton) {
+                        skeletons.add((Skeleton) actor);
+                    } else if (actor instanceof Batman) {
+                        batmen.add((Batman) actor);
+                    } else if (actor instanceof Scrab) {
+                        scrabs.add((Scrab) actor);
+                    } else if (actor instanceof Ghost) {
+                        ghosts.add((Ghost) actor);
+                    } else if (actor instanceof Player) {
+                        this.player = ((Player) actor);
+                    }
+                }
+            }
+        }
     }
 }

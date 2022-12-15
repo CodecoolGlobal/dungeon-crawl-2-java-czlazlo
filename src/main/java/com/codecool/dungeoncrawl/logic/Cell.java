@@ -9,7 +9,7 @@ public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     transient private GameMap gameMap;
-    transient private int x, y;
+    private int x, y;
 
     transient private Items items;
 
@@ -47,7 +47,7 @@ public class Cell implements Drawable {
     }
 
     public Cell getNeighbor(int dx, int dy) {
-        return gameMap.getCell(x + dx, y + dy);
+        return gameMap.getCell(Math.max(x + dx, 0), Math.max(y + dy, 0));
     }
 
     @Override
@@ -61,5 +61,9 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
+    }
+
+    public void setMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 }
