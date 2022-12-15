@@ -5,6 +5,8 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,7 +35,6 @@ public class Main extends Application {
     public void setMap(GameMap map) {
         this.map = map;
     }
-
     GameMap map = MapLoader.loadMap("/map.txt");
 
     Gson gson = new Gson();
@@ -44,11 +46,18 @@ public class Main extends Application {
     }
 
     public void loadMap() {
-        System.out.println("loadmap vagyok");
-        File gameState = new File("save.json");
-        GameMap savedMap = gson.fromJson(String.valueOf(gameState), GameMap.class);
-        setMap(savedMap);
-
+            File gameState = new File("save.json");
+            try {
+                JsonReader reader = new JsonReader(new FileReader(gameState));
+                if (reader.peek() == JsonToken.BEGIN_OBJECT) {
+                    GameMap savedMap = gson.fromJson(reader, GameMap.class);
+                    setMap(savedMap);
+                } else {
+                    System.out.println("Invalid data format: expected JSON object");
+                }
+            } catch (IOException e) {
+                System.out.println("Error reading file: " + e.getMessage());
+            }
     }
 
 
